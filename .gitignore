@@ -1,0 +1,10 @@
+# Mac junk
+.DS_Store
+._*
+.Trashes
+.Spotlight-V100
+.fseventsd
+
+# OpenCore junk
+*.ia
+*.txt
