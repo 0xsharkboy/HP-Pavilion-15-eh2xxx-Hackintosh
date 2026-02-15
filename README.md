@@ -1,5 +1,9 @@
 # Hackintosh: OpenCore EFI for HP Pavilion 15-eh2xxx Laptop
 
+<p align="center">
+  <img src="Screenshots/About_This_Mac.jpg" width="600" alt="About This Mac">
+</p>
+
 ## Table of Contents
 
 *   [Specifications](#specifications)
