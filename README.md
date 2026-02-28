@@ -23,8 +23,8 @@
 | Display | 15.6" FHD (1920 x 1080), IPS, 60Hz |
 | NVMe | Intel SSDPEKNU010TZH 1TB |
 | Audio | Realtek (AppleALC layout-id 13) |
-| Wireless | Realtek RTL8852BE (PCIe - Unsupported) / Realtek RTL8812AU (USB - Supported via RtWlanU) |
-| Bluetooth | Realtek [0bda:b85c] (Unsupported) |
+| Wireless | Realtek RTL8852BE (PCIe - Unsupported) / Intel AX200 (PCIe - Supported) / Realtek RTL8812AU (USB - Supported via RtWlanU) |
+| Bluetooth | Realtek [0bda:b85c] (Unsupported) / Intel AX200 (Supported) |
 
 ## What Works
 | Item | Status | Notes |
@@ -39,7 +39,8 @@
 | Microphone | ✅ | Supported via [AMDMicrophone](https://github.com/qhuyduong/AMDMicrophone) |
 | Trackpad | ✅ | VoodooI2C (I2C HID mode) |
 | Webcam | ✅ | Native support (UVC) |
-| WIFI | ✅ | USB WLAN (RTL8812AU) supported via RtWlanU |
+| WIFI | ✅ | Internal Intel AX200 (See [WiFi Upgrade](#internal-wifi--bluetooth-upgrade)) or USB WLAN (RTL8812AU) via RtWlanU |
+| Bluetooth | ✅ | Internal Intel AX200 (See [WiFi Upgrade](#internal-wifi--bluetooth-upgrade)) |
 | Battery | ✅ | SMCBatteryManager & ECEnabler |
 | Shutdown/Reboot | ✅ | No issues |
 | Sleep/Wake up | ✅ | Working (See [BIOS Options](#bios-options)) |
@@ -52,13 +53,21 @@
 ## What Doesn't Work
 | Item | Status | Notes |
 | --- | --- | --- |
-| Bluetooth | ❌ | Realtek Bluetooth is not supported |
+| Stock Bluetooth | ❌ | Realtek Bluetooth is not supported |
 | Fingerprint Reader | ❌ | No macOS support for Elan/Goodix sensors |
-| PCIe WiFi | ❌ | RTL8852BE is not supported. Use USB WiFi or replace card |
+| Stock PCIe WiFi | ❌ | RTL8852BE is not supported. Use USB WiFi or replace card |
 
 ***
 > **You CAN NOT use SMBIOS from this repository, it MUST be unique for every macOS installation**
 ***
+
+## Internal WiFi & Bluetooth Upgrade
+If you replaced the internal WiFi card with an Intel card (AX200 in my case), both WiFi and Bluetooth work on macOS Sequoia.
+
+To enable them, you must follow this guide: [Native Wifi for Hackintoshes with Intel Wireless cards on macOS Sequoia](https://github.com/randomappleboi/Native-Wifi-for-Hackintoshes-with-Intel-Wireless-cards-on-macOS-sequoia).
+
+> [!IMPORTANT]
+> The required kexts for this upgrade (`AirportItlwm`, `IntelBluetoothFirmware`, `BlueToolFixup`, etc.) are already included in the `EFI/OC/Kexts` folder. However, they are **disabled by default** in `Config.plist` to avoid compatibility issues for users who haven't replaced their card. You must enable them manually in your `Config.plist` following the guide above.
 
 ## BIOS Options
 *   Turn off `Secure Boot`
